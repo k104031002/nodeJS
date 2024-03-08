@@ -52,11 +52,16 @@ const server = http.createServer((request, response) => {
         content = readFileSync(filePath);
         response.end(content)
     } catch (error) {
+        console.log(error);
         response.setHeader("content-type", "text/html;charset=utf-8")
-        response.statusCode = 500;
-        response.end("<h1>讀不到檔案</h1>")
+        if(error.code === "ENOENT"){
+            response.statusCode = 404;    
+            response.end("<h1>讀不到檔案</h1>")
+        }else{
+            response.statusCode = 500;
+            response.end("<h1>讀取錯誤了啦</h1>")
+        }
     }
-    // console.log(pathname);
 });
 server.listen(9000, () => {
     console.log("伺服器已啟動於 http://localhost:9000");
