@@ -1,4 +1,5 @@
-import http from "http"
+import http from "http";
+
 
 const server = http.createServer((request, response)=>{
     // console.log(request.method);  // GET/POST/DELETE 等方法的字樣
