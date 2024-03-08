@@ -1,0 +1,31 @@
+        .row {
+            display: flex;
+            width: 180px;
+            background-color: pink;
+
+            &:nth-child(odd) {
+                /* 相間變色 */
+                background-color: orange;
+            }
+
+            .col {
+                width: 60px;
+                height: 30px;
+                display: grid;
+                place-items: center;
+                cursor: pointer;
+                /* 變手指 */
+                user-select: none;
+
+                /* 不能選取反白 */
+                &.active {
+                    background-color: purple;
+                    color: white;
+                }
+
+                &.active:nth-child(odd) {
+                    background-color: rgb(228, 21, 228);
+                    color: #fff;
+                }
+            }
+        }

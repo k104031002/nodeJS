@@ -12,10 +12,6 @@ const server = http.createServer((request, response) => {
 const filePath = resolve(import.meta.dirname, "test.html");
 const htmlContent = readFileSync(filePath);
 // console.log(htmlContent.toString());
-
-
-
-
     response.setHeader("content-type", "text/html;charset=utf-8")
     response.end(htmlContent)
 })
