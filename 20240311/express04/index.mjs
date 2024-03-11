@@ -11,7 +11,7 @@ app.get("/", (req, res) => {
     // http 模組本來就有
 })
 
-app.get("/p/:id", (req, res) => {
+app.get("/p/:id?", (req, res) => {
     const { id } = req.params;
     // let pageContent = "IG"
     console.log(id);
@@ -26,9 +26,30 @@ app.get("/p/:id", (req, res) => {
     res.send(pageContent)
     // http 模組本來就有
 })
-app.get("/users/:userID",(res, req)=>{
-    console.log(`使用者ID是${res.params.userID}`);
-    req.send(`使用者ID是${res.params.userID}`);
+app.get("/users/:userID?", (req, res) => {
+    console.log(`使用者ID是${req.params.userID}`);
+    if (req.params.userID) {
+        res.send(`使用者ID是${req.params.userID}`);
+    } else {
+        res.send(`匿名的訪客`)
+    }
+    res.send(`使用者ID是${req.params.userID}`);
+})
+
+app.get("/books/:cateID/:bookID", (req, res) => {
+    res.send(`書本的分類是 ${req.params.cateID}，書本的編號是 ${req.params.bookID}`);
+})
+
+app.get("/user/:id([0-9]+)", (req, res) => {
+    // 路徑 user/ 後只有帶數字才符合
+    // :id([a-z][0-9]+)  => 則 a~z 一個字在加數字才符合 
+    res.send(`${req.params.id}`);
+
+})
+
+app.get("/files/*", (req, res) => {
+    const filePath = req.params[0];
+    res.send(`${filePath}`);
 })
 
 // http:localhost:3000/p/id
