@@ -1,0 +1,7 @@
+body{
+    min-height: 100svh;
+    background-image: url(../images/pexels-ngsoft-it-13119615.jpg);
+    background-size: cover;
+    background-position: center center;
+    color: orange;
+}
