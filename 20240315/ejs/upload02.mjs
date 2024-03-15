@@ -3,6 +3,7 @@ import { resolve, extname } from "path"
 import multer from "multer"
 import { renameSync } from "fs"
 import { rename } from "fs/promises"
+import {uuid} from "uuidv4"
 const __dirname = import.meta.dirname
 const app = express()
 
@@ -18,10 +19,16 @@ const storage = multer.diskStorage({
         cb(null, resolve(__dirname, "public", "uploads"))
     },
     filename: function (req, file, cb) {
-        let timestamp = Date.now();
-        let newName = `${timestamp}${extname(file.originalname)}`
-        // console.log(timestamp);
-        req.body.myFiles = newName
+        // timestamp 為檔名 
+        // let timestamp = Date.now();
+        // let newName = `${timestamp}${extname(file.originalname)}`
+        // uuid 為檔名
+        let newName=`${uuid()}${extname(file.originalname)}`
+
+        if (!req.body[file.fieldname]) {
+            req.body[file.fieldname] = []
+        }
+        req.body[file.fieldname].push(newName)
         cb(null, newName)
     }
 })
@@ -49,17 +56,17 @@ app.post("/upload1", upload.single("myFile"), (req, res) => {
 })
 
 app.post("/upload2", upload.array("myFile", 4), (req, res) => {
-    let myFiles = [];
-    req.files.forEach(file => {
-        let newName = `${file.filename}${extname(file.originalname)}`
-        // console.log(newName);
-        myFiles.push(newName)
-        rename(file.path, resolve(__dirname, "public", "uploads", newName))
+    // let myFiles = [];
+    // req.files.forEach(file => {
+    //     let newName = `${file.filename}${extname(file.originalname)}`
+    //     // console.log(newName);
+    //     myFiles.push(newName)
+    //     rename(file.path, resolve(__dirname, "public", "uploads", newName))
 
-    })
-    // console.log(myFiles);
-    req.body.myFiles = myFiles
-    res.json({ body: req.body })
+    // })
+    // // console.log(myFiles);
+    // req.body.myFiles = myFiles
+    res.json({ body: req.body, file: req.files })
 
 })
 app.post("/upload2_2", upload.array("myFile[]", 4), (req, res) => {
