@@ -11,7 +11,7 @@ app.set("views", resolve(__dirname, "views"))
 
 app.use("/bs", express.static(resolve(__dirname, "node_modules/bootstrap/dist")))
 app.use("/jq", express.static(resolve(__dirname, "node_modules/jquery/dist")))
-// app.use(express.static(resolve(__dirname), "public"))
+app.use(express.static(resolve(__dirname, "public")))
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
