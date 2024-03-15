@@ -25,7 +25,8 @@
   },
   "scripts": {
     "test": "nodemon ejs04.mjs",
-    "upload1": "nodemon upload01.mjs"
+    "upload1": "nodemon upload01.mjs",
+    "upload2": "nodemon upload02.mjs"
   },
   "keywords": [],
   "author": "",

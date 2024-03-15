@@ -13,7 +13,20 @@ app.use("/bs", express.static(resolve(__dirname, "node_modules/bootstrap/dist"))
 app.use("/jq", express.static(resolve(__dirname, "node_modules/jquery/dist")))
 // app.use(express.static(resolve(__dirname), "public"))
 
-const upload = multer({ dest: resolve(__dirname, "public", "uploads") })
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, resolve(__dirname, "public", "uploads"))
+    },
+    filename: function (req, file, cb) {
+        let timestamp = Date.now();
+        let newName = `${timestamp}${extname(file.originalname)}`
+        // console.log(timestamp);
+        req.body.myFiles = newName
+        cb(null, newName)
+    }
+})
+
+const upload = multer({ storage })
 
 
 app.get("/", (req, res) => {
@@ -32,12 +45,7 @@ app.get("/form2_2", (req, res) => {
 
 app.post("/upload1", upload.single("myFile"), (req, res) => {
     // res.send("處理檔案上傳")
-    let timestamp = Date.now();
-    //  new Date().getTime() 瀏覽器的JS的timestamp 寫法
-    let newName = `${timestamp}${extname(req.file.originalname)}`
-    renameSync(req.file.path, resolve(__dirname, "public", "uploads", newName))
-    req.body.myFile = newName
-    res.json({ body: req.body })
+    res.json({ body: req.body, file: req.file })
 })
 
 app.post("/upload2", upload.array("myFile", 4), (req, res) => {

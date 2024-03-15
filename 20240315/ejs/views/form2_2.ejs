@@ -9,9 +9,9 @@
 </head>
 
 <body>
-    <h1>單一檔案上傳</h1>
+    <h1>複數檔案上傳2</h1>
     <div class="container mt-3">
-        <form action="/upload1" method="post" enctype="multipart/form-data">
+        <form action="/upload2_2" method="post" enctype="multipart/form-data">
             <div class="input-group mb-2">
                 <span class="input-group-text">名稱</span>
                 <input type="text" class="form-control" name="accoount">
@@ -21,7 +21,13 @@
                 <input type="password" class="form-control" name="accoount">
             </div>
             <div class="input-group mb-2">
-                <input type="file" class="form-control" name="myFile">
+                <input type="file" class="form-control" name="myFile[]">
+            </div>
+            <div class="input-group mb-2">
+                <input type="file" class="form-control" name="myFile[]">
+            </div>
+            <div class="input-group mb-2">
+                <input type="file" class="form-control" name="myFile[]">
             </div>
             <div class="d-flex">
                 <button class="btn btn-primary ms-auto" type="submit">送出</button>
