@@ -2,6 +2,7 @@ import express from "express"
 import { resolve, extname } from "path"
 import multer from "multer"
 import { renameSync } from "fs"
+import {rename} from "fs/promises"
 const __dirname = import.meta.dirname
 const app = express()
 
@@ -26,10 +27,10 @@ app.post("/upload1", upload.single("myFile"), (req, res) => {
     // res.send("處理檔案上傳")
     let timestamp = Date.now();
     //  new Date().getTime() 瀏覽器的JS的timestamp 寫法
-    let newName = `${timestamp}.${extname(req.file.originalname)}`
+    let newName = `${timestamp}${extname(req.file.originalname)}`
     renameSync(req.file.path, resolve(__dirname, "public", "uploads", newName))
     req.body.myFile = newName
-    res.json({ body: req.body, file: req.file })
+    res.json({ body: req.body})
 })
 
 
