@@ -6,20 +6,21 @@
   <link rel='stylesheet' href='/stylesheets/style.css' />
   <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
   <link href="/fontawesome/css/all.css" rel="stylesheet">
-<script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/javascripts/index.js" defer></script>
 </head>
 
 <body>
   <div class="container-md mt-1">
     <div class="input-group input-group-lg">
-      <div class="btn btn-primary input-group-text">
+      <div class="btn btn-primary input-group-text btn-prevDate">
         <i class="fa-solid fa-caret-left"></i>
       </div>
-      <input type="date" class="form-control">
-      <div class="btn btn-primary input-group-text">
+      <input type="date" class="form-control myDate" value="<%=date%>">
+      <div class="btn btn-primary input-group-text btn-nextDate">
         <i class="fa-solid fa-caret-right"></i>
       </div>
-      <div class="btn btn-primary input-group-text" data-bs-toggle="offcanvas" data-bs-target="#inputArea">
+      <div class="btn btn-primary input-group-text btn-addShow">
         <i class="fa-solid fa-calculator"></i>
       </div>
     </div>
@@ -57,7 +58,13 @@
           <span class="input-group-text">消費分類</span>
           <select name="sort" class="form-select">
             <option value selected disabled>請選擇</option>
-            <option value="1">食物</option>
+            <% if(sorts){ %>
+              <% sorts.forEach(sort=>{ %>
+                <option value="<%=sort.id%>">
+                  <%=sort.name%>
+                </option>
+                <% }) %>
+                  <% } %>
           </select>
         </div>
         <input type="hidden" name="date" value="">
