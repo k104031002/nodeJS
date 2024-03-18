@@ -10,6 +10,10 @@ const updateSet = document.querySelector(".updateSet");
 const form1 = document.querySelector("form");
 const btnSend = document.querySelector(".btn-send");
 
+const lists = document.querySelectorAll(".list");
+const btnUpdate = document.querySelector(".btn-update");
+
+
 myDate.addEventListener("change", (e) => {
     let date = e.currentTarget.value;
     window.location.href = `/expe/d/${date}`;
@@ -43,4 +47,42 @@ btnAddShow.addEventListener("click", (e) => {
 
 btnSend.addEventListener("click", (e) => {
     form1.submit();
+})
+
+lists.forEach(list => {
+    list.addEventListener("click", (e) => {
+        let id = e.currentTarget.getAttribute("id");
+        let title = e.currentTarget.getAttribute("title");
+        let sort = e.currentTarget.getAttribute("sort");
+        let money = e.currentTarget.getAttribute("money");
+        document.querySelector("input[name=title]").value = title;
+        document.querySelector("input[name=money]").value = money;
+        document.querySelector("input[name=id]").value = id;
+        document.querySelector("select").selectedIndex = sort;
+        newSet.classList.add("d-none");
+        newSet.classList.remove("d-flex");
+        updateSet.classList.remove("d-none");
+        updateSet.classList.add("d-flex");
+        bsOffCavas.show();
+    })
+})
+
+btnUpdate.addEventListener("click", e => {
+    let url = "/expe";
+    const formData = new FormData(form1)
+    // 下面是觀察FormData的方法，正式使用時並不需要
+    for (let [key, value] of formData.entries()) {
+        console.log(key, value);
+    }
+
+    fetch(url, {
+        method:"PUT",
+        body: formData
+    }).then(response => {
+        return response.json()
+    }).then(result => {
+        console.log(result);
+    }).catch(error => {
+        console.log(error);
+    });
 })

@@ -1,7 +1,9 @@
 import express from "express";
 import moment from "moment";
+import multer from "multer";
 import connection from "../db2.mjs";
 const router = express.Router();
+const upload = multer();
 
 /* GET users listing. */
 router.get('/', (req, res, next) => {
@@ -39,8 +41,15 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-router.put('/', (req, res, next) => {
+router.put('/', upload.none(), async(req, res, next) => {
+  console.log(req.body);
+  const { title, money, sort, date, id } = req.body;
+  let sql = "UPDATE `expense` SET `title` = ?, `sort` = ?, `money` = ?, `date` = ? WHERE `expense`.`id` = ?;"
+  let dataAry = [title, sort, money, date, id];
+  let [results] = await connection.execute(sql, dataAry);
+  console.log(results);
   res.send("修改指定日期的一筆消費");
+  // res.redirect(`/expe/d/${date}`);
 })
 
 router.delete('/', (req, res, next) => {
