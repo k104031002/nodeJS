@@ -7,6 +7,9 @@ const bsOffCavas = new bootstrap.Offcanvas("#inputArea");
 const newSet = document.querySelector(".newSet");
 const updateSet = document.querySelector(".updateSet");
 
+const form1 = document.querySelector("form");
+const btnSend = document.querySelector(".btn-send");
+
 myDate.addEventListener("change", (e) => {
     let date = e.currentTarget.value;
     window.location.href = `/expe/d/${date}`;
@@ -36,5 +39,8 @@ btnAddShow.addEventListener("click", (e) => {
     updateSet.classList.add("d-none");
     updateSet.classList.remove("d-flex");
     bsOffCavas.show();
+})
 
+btnSend.addEventListener("click", (e) => {
+    form1.submit();
 })
