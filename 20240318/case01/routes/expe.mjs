@@ -13,8 +13,9 @@ router.get('/', (req, res, next) => {
 router.get('/d/:date', async (req, res, next) => {
   // res.send('讀取指定日期的所有消費');
   const date = req.params.date;
-  let sql = "SELECT * FROM 'sort'";
+  let sql = "SELECT * FROM `sort`";
   let [sorts] = await connection.execute(sql).catch(error => [undefined]);
+  console.log(sorts);
   res.render("index", { date, sorts })
 });
 
