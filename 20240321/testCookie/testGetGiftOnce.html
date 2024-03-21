@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>只執行一次 開禮物箱</title>
+    <style>
+        body{
+            min-height: 100svh;
+            display: grid;
+            place-items: center;
+        }
+        .box{
+            width: 300px;
+            height: 300px;
+            cursor: pointer;
+            & img{
+                width: 100%;
+                height: auto;
+            }
+        }
+        .unbox{
+            height: 350px;
+            width: auto;
+            & img{
+                height: 100%;
+                width: auto;
+            }
+        }
+        .info{
+            font-size: 36px;
+            text-align: center;
+        }
+        .big{
+            font-family: sans-serif;
+            font-size: 60px;
+            font-weight: bold;
+            color: red;
+        }
+        .hidden{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="package">
+            <div class="info">恭喜你得第<span class="big">1</span>獎</div>
+            <div class="box hidden"><img src="https://littleblessings.com.au/wp-content/uploads/2019/09/Gift-Box.jpg" alt="">
+            </div>
+            <div class="unbox hidden"><img
+                    src="https://st4.depositphotos.com/2495409/24488/i/450/depositphotos_244880124-stock-photo-opened-gift-box-illustration-isolated.jpg"
+                    alt="">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
