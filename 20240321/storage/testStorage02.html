@@ -82,7 +82,7 @@
                     opacity: 1,
                 },
                 {
-                    transform: `translateY(${window.innerHeight - 100}px)`,
+                    transform: `translateY(${window.innerHeight - 50 - element.getBoundingClientRect().top}px)`,
                     opacity: 0,
                 }
             ], {
@@ -90,6 +90,9 @@
                 fill: "forwards",
                 easing: "ease-in-out"
             });
+            animation.onfinish = () => {
+                element.remove();
+            }
         })
 
 
