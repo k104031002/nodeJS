@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>to do list</title>
+    <style>
+        #myInput {
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 24px;
+            padding-left: 10px;
+        }
+
+        .todo {
+            font-size: 30px;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" id="myInput" autofocus>
+    <div class="todolist">
+        <div class="todo">
+            <input type="checkbox" id="todo1">
+            <label for="todo1">買雞蛋</label>
+        </div>
+    </div>
+
+    <script>
+        let todoAry;
+        const todolist = document.querySelector(".todolist");
+
+        if (localStorage.getItem("todo")) {
+            todoAry = JSON.stringify(localStorage.getItem("todo"));
+        } else {
+            todoAry = []
+        }
+
+        myInput.addEventListener()
+
+
+
+    </script>
+</body>
+
+</html>

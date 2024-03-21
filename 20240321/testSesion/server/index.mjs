@@ -50,8 +50,9 @@ app.get("/", (req, res) => {
 })
 
 app.post("/", upload.none(), (req, res) => {
-    console.log(req.body);
+    // console.log(req.get("cookie"));
     const { account, password } = req.body;
+    console.log(account, password);
     if (users[account] && users[account].pwd === password) {
         const user = users[account];
         user.account = account;
@@ -62,11 +63,17 @@ app.post("/", upload.none(), (req, res) => {
     }
 })
 
-app.get("/checkLogin", (req, res)=>{
-    console.log(req);
+app.get("/checkLogin", (req, res) => {
     console.log(req.session.user);
-    const {user} = req.session;
-    res.json({user});
+    const { user } = req.session;
+    res.json({ user });
+})
+
+app.get("/logout", (req, res) => {
+    delete req.session.user;
+    const { user } = req.session;
+
+    res.json({ user });
 })
 
 app.listen(3000, () => {

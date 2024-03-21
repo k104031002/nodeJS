@@ -75,12 +75,12 @@
 
             checkLogin()
 
+            // fetch 送出表單內容的第二個方法
             btnSend.addEventListener("click", e => {
                 let url = "http://localhost:3000";
-                const formData = new FormData(form1);
-                // fetch 不會主動傳送 cookie
-                // 要設置 credentials include
-                // 
+                const formData = new FormData();
+                formData.append("acccount", document.querySelector("[name=account]").value);
+                formData.append("password", document.querySelector("[name=password]").value);
 
                 fetch(url, {
                     credentials: "include",
@@ -100,7 +100,7 @@
                 });
             })
 
-            btnLogout.addEventListener("click", e=>{
+            btnLogout.addEventListener("click", e => {
                 let url = "http://localhost:3000/logout"
                 fetch(url, {
                     credentials: "include",
