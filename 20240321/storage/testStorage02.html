@@ -17,6 +17,8 @@
             font-size: 30px;
             user-select: none;
         }
+
+        .deleted {}
     </style>
 </head>
 
@@ -24,8 +26,8 @@
     <input type="text" id="myInput" autofocus>
     <div class="todolist">
         <div class="todo">
-            <input type="checkbox" id="todo1">
-            <label for="todo1">買雞蛋</label>
+            <!-- <input type="checkbox" id="todo1">
+            <label for="todo1">買雞蛋</label> -->
         </div>
     </div>
 
@@ -33,13 +35,62 @@
         let todoAry;
         const todolist = document.querySelector(".todolist");
 
+        const setTodo = tempObj => {
+            // 產生實體DOM 
+            let node = document.createElement("div");
+            node.innerHTML = ` <div class="todo">
+            <input type="checkbox" id="todo${tempObj.t}">
+            <label for="todo${tempObj.t}">${tempObj.text}</label>
+        </div>`;
+            todolist.append(node.children[0]);
+        }
+
         if (localStorage.getItem("todo")) {
-            todoAry = JSON.stringify(localStorage.getItem("todo"));
+            todoAry = JSON.parse(localStorage.getItem("todo"));
+            todoAry.forEach(dodo => {
+                setTodo(dodo)
+            });
         } else {
             todoAry = []
         }
 
-        myInput.addEventListener()
+        myInput.addEventListener("keyup", e => {
+            if (e.ctrlKey === true && e.key === "Enter") {
+                let t = new Date().getTime();
+                let tempObj = {}
+                tempObj.t = t;
+                tempObj.text = e.currentTarget.value;
+                console.log(tempObj);
+                todoAry.push(tempObj);
+                localStorage.setItem("todo", JSON.stringify(todoAry))
+                setTodo(tempObj);
+                myInput.value = "";
+            }
+        })
+
+        todolist.addEventListener("change", e => {
+            e.target.disabled = true;
+            let t = parseInt(e.target.id.slice(4), 10);
+            todoAry = todoAry.filter(dodo => dodo.t !== t);
+            localStorage.setItem("todo", JSON.stringify(todoAry));
+            let element = e.target.closest(".todo");
+            // element.remove();
+            element.classList.add("deleted")
+            const animation = element.animate([
+                {
+                    transform: `translateY(0)`,
+                    opacity: 1,
+                },
+                {
+                    transform: `translateY(${window.innerHeight - 100}px)`,
+                    opacity: 0,
+                }
+            ], {
+                duration: 500,
+                fill: "forwards",
+                easing: "ease-in-out"
+            });
+        })
 
 
 
