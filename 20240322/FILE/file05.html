@@ -4,23 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>上傳影片預覽</title>
+    <title>上傳文字檔預覽</title>
 </head>
 
 <body>
-    <input type="file" name="myFile" accept="video/*">
-    <video id="videoPlayer" controls></video>
-
+    <input type="file" name="myFile" accept="text/html,.json">
+    <div id="textArea"></div>
     <script>
         document.querySelector("[name=myFile]").addEventListener("change", e => {
             let file = e.target.files[0];
 
             let reader = new FileReader();
             reader.addEventListener("load", e => {
-                videoPlayer.src = e.target.result;
-                videoPlayer.play();
+                textArea.innerHTML = e.target.result;
             });
-            reader.readAsDataURL(file);
+            reader.readAsText(file);
         })
     </script>
 </body>
