@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <video id="player" width="100%"></video>
+    <div class="btns">
+        <button type="button" id="video1">影片1</button>
+        <button type="button" id="video2">影片2</button>
+        <button type="button" id="video3">影片3</button>
+        <button type="button" id="video4">影片4</button>
+        <button type="button" id="control">控制</button>
+    </div>
+
+    <script>
+        const btnsDiv = document.querySelector(".btns");
+        const btns = {
+            v1: document.querySelector("#video1"),
+            v2: document.querySelector("#video2"),
+            v3: document.querySelector("#video3"),
+            v4: document.querySelector("#video4"),
+            ctrl: document.querySelector("#control")
+        };
+        const player = document.querySelector("#player");
+        const postURL = "./images/A3.jpg";
+        // 
+        player.setAttribute("poster", postURL);
+
+        const playerListener = e => {
+            console.log(`${e.type} duration:${player.duration} currentTime:${player.currentTime} volume:${player.volume}, muted:${player.muted},paused:${player.paused}`);
+            // duration 總片長
+        }
+
+        player.addEventListener("ended", playerListener)
+        player.addEventListener("timeupdate", playerListener)
+        player.addEventListener("loadedmetadata", playerListener)
+        // 
+        btnsDiv.addEventListener("click", e => {
+            // console.log(e.target);
+            switch (e.target) {
+                case btns.v1:
+                    player.src = "../../videos/videos/video1.mp4";
+                    player.play()
+                    break;
+                case btns.v2:
+                    player.src = "../../videos/videos/video2.mp4";
+                    player.play()
+                    break;
+                case btns.v3:
+                    player.src = "../../videos/videos/video3.mp4";
+                    player.play()
+                    break;
+                case btns.v4:
+                    player.src = "../../videos/videos/video4.mp4";
+                    player.play()
+                    break;
+                case btns.ctrl:
+                    player.paused ? player.play() : player.pause();
+                    break;
+            }
+        })
+    </script>
+</body>
+
+</html>
