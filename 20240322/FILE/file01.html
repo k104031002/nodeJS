@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .myFiles {
+            display: none;
+        }
+
+        .container {
+            background-color: lightblue;
+            min-height: 10px;
+            box-sizing: border-box;
+            padding-top: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="file" class="myFiles" name="myFiles" id="myFiles" multiple>
+    <div class="container" id="container"></div>
+
+    <script>
+        const myFiles = document.querySelector("[name=myFiles]");
+        const container = document.querySelector(".container")
+
+        container.addEventListener("click", () => {
+            myFiles.click();
+        })
+
+        myFiles.addEventListener("change", e => {
+            // console.log(e);
+            let fileList = e.target.files;
+            // console.log(fileList);
+            //  Array.from(fileList) = [...fileList]
+            [...fileList].forEach(file => {
+                console.log(file);
+                container.innerHTML += `${file.name}<br>`
+            })
+        })
+
+    </script>
+</body>
+
+</html>
