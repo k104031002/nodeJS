@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        mark {
+            color: aliceblue;
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="editor" contenteditable="">
+        確定對著集中顯示休閒第二次先後原創手段的是說過畫面，道理更大模型地區海外，有了非常怎麼小子所說身材笑着，參與雜誌教育一份共享版主營記憶威脅買了，校長也有及時一樣較大兩次兩種防止提供回到北方，訂單表達進去做什麼交通可是系統老婆而是有時放心土地，我覺得，書記。
+    </div>
+    <script>
+        const editor = document.querySelector(".editor");
+
+        editor.addEventListener("mouseup", e => {
+            const selection = window.getSelection();
+            const selectedText = selection.toString().trim();
+
+            // console.log(selectedText);
+            console.log(selection);
+
+            if (selectedText.length <= 0) {
+                return false;
+            }
+
+            const range = selection.getRangeAt(0);
+            const mark = document.createElement("mark");
+            mark.textContent = selectedText;
+
+            range.deleteContents();
+            range.insertNode(mark);
+            
+        })
+    </script>
+</body>
+
+</html>

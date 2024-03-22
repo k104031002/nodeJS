@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <form action="" autocomplete="on">
+    <form action="" autocomplete="on" onsubmit="return false;">
         <label for="myName">姓名: </label>
         <input type="text" name="myName" id="myName" autocomplete="given-name" autofocus placeholder="請輸入名字" required
             pattern=".{5}"><br>
@@ -32,8 +32,31 @@
         const inputs = document.querySelectorAll("input");
 
         const myValidate = e => {
-            console.log(e);
+            // console.log(e.target);
+            // console.log(e.target.Validity);
+            // console.log("----");
+            let v = e.target.validity;
+            // true === v.valueMissing  // 請填寫這個欄位
+            // true === v.patternMismatch  // 請符合要求的格式
+            // true === v.typeMismatch  // 格式不正確
+            let msg = "";
+            switch (true) {
+                case v.valueMissing:
+                    msg = "填寫這個欄位鵝~"
+                    break;
+                case v.patternMismatch:
+                    msg = "格式不正確鵝~"
+                    break;
+                case v.typeMismatch:
+                    msg = "類型不正確鵝~"
+                    break;
+            }
+            e.target.setCustomValidity(msg)
         }
+
+        inputs.forEach(input => {
+            input.addEventListener("blur", myValidate)
+        })
     </script>
 </body>
 
