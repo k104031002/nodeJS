@@ -4,7 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>自製影片相關按鈕</title>
+    <style>
+        .sub {
+            font-size: 36px;
+            font-weight: bold;
+            color: #777;
+
+            .active {
+                color: #c00707;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -15,6 +26,11 @@
         <button type="button" id="video3">影片3</button>
         <button type="button" id="video4">影片4</button>
         <button type="button" id="control">控制</button>
+    </div>
+    <div class="sub">
+        <span class="word">你</span><span class="word">好</span><span class="word">法</span><span
+            class="word">律</span><span class="word">蓮</span>
+
     </div>
 
     <script>
@@ -28,12 +44,29 @@
         };
         const player = document.querySelector("#player");
         const postURL = "./images/A3.jpg";
+        const words = document.querySelectorAll(".sub .word")
         // 
         player.setAttribute("poster", postURL);
 
         const playerListener = e => {
             console.log(`${e.type} duration:${player.duration} currentTime:${player.currentTime} volume:${player.volume}, muted:${player.muted},paused:${player.paused}`);
             // duration 總片長
+            if (player.currentTime > 2.1 && player.currentTime < 2.4) {
+                words[0].classList.add("active");
+            }
+            if (player.currentTime > 2.4 && player.currentTime < 2.7) {
+                words[1].classList.add("active");
+            }
+            if (player.currentTime > 2.7 && player.currentTime < 3.0) {
+                words[2].classList.add("active");
+            }
+            if (player.currentTime > 3.0 && player.currentTime < 3.3) {
+                words[3].classList.add("active");
+            }
+            if (player.currentTime > 3.3 && player.currentTime < 3.6) {
+                words[4].classList.add("active");
+            }
+
         }
 
         player.addEventListener("ended", playerListener)
